@@ -1,8 +1,3 @@
 # FACE_ANTISPOOF
 
-THIS MODEL WAS TRAINED ON NEARLY 1,20,000 IMAGES AND WAS MEANT TO FIND POTENTIAL ATTENDANCE FRAUD USING PRINTED IMAGES AND PHONE OR LAPTOP SCREENS.
-THAT WAS THE CURRENT REQUIREMENT FOR THE ENVIRONMENT AND DOESN'T INCLUDE SPOOFS USING MASKS.
-
-ALSO A LIGHT WEIGHT MODEL AND QUANTIZED WHICH WAS MEANT TO RUN ON MOBILE DEVICES
-
-USE THE YOLO MODEL TO EXTRACT THE FACE AND THEN PASS THAT FACE TO EFFICIENT NET MODEL
+The FACE_ANTISPOOF model is a lightweight, quantized anti-spoofing model trained on approximately 120,000 images to detect attendance fraud using printed photos and digital screen replays (such as from phones or laptops). It does not handle more complex spoofing methods like 3D masks. The model uses YOLO for face detection and EfficientNet as the classification backbone. During training, face crops included the entire head region as extracted by the YOLO detector. For mobile deployment, the FaceAPI Tiny YOLO model is used for face detection, which typically detects only the forehead region. To ensure compatibility with the EfficientNet model, the client-side implementation must scale the detected forehead region to approximate a full-head crop before passing it to the classifier. This adjustment is necessary to align with the training data distribution and maintain model accuracy during real-time inference on mobile devices.
